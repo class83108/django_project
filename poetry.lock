@@ -35,6 +35,26 @@ argon2 = ["argon2-cffi (>=19.1.0)"]
 bcrypt = ["bcrypt"]
 
 [[package]]
+name = "django-allauth"
+version = "64.2.1"
+description = "Integrated set of Django applications addressing authentication, registration, account management as well as 3rd party (social) account authentication."
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "django_allauth-64.2.1.tar.gz", hash = "sha256:54bf0af8dc5c334254dd56f9069447c19b9b623110a095b2a0dcb82a414e1055"},
+]
+
+[package.dependencies]
+Django = ">=4.2"
+
+[package.extras]
+mfa = ["fido2 (>=1.1.2)", "qrcode (>=7.0.0)"]
+openid = ["python3-openid (>=3.0.8)"]
+saml = ["python3-saml (>=1.15.0,<2.0.0)"]
+socialaccount = ["pyjwt[crypto] (>=1.7)", "requests (>=2.0.0)", "requests-oauthlib (>=0.3.0)"]
+steam = ["python3-openid (>=3.0.8)"]
+
+[[package]]
 name = "load-dotenv"
 version = "0.1.0"
 description = "Automatically and implicitly load environment variables from .env file"
@@ -172,4 +192,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "22968345617ea7a83340775a2bfd9834e04857234878ce189a94e0080dd3cec2"
+content-hash = "47cde3443b596df91530f8321e9d927d3983d30b6e2ffcd1a156c84dc56b93e7"

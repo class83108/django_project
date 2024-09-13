@@ -18,7 +18,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+from .views import index_view
+
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("article/", include("article.urls")),
+    path("<str:user_name>/<int:age>/<slug:page_name>", index_view),
 ]
