@@ -25,6 +25,7 @@ from .views import index_view, demo_path_view, demo_view, demo_html_tag_view
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("article/", include(("article.urls", "article"), namespace="article")),
+    path("chat/", include(("chat.urls", "chat"), namespace="chat")),
     # path("<str:user_name>/<int:age>/<slug:page_name>/<uuid:user_id>", index_view),
     # path("<path:to_inde_page>", demo_path_view),
     path("demo/", demo_view),

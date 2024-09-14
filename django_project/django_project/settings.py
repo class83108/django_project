@@ -29,6 +29,11 @@ DB_USER = os.getenv("DB_USER")
 DB_PWD = os.getenv("DB_PWD")
 DB_NAME = os.getenv("DB_NAME")
 
+SECOND_DB_HOST = os.getenv("SECOND_DB_HOST")
+SECOND_DB_USER = os.getenv("SECOND_DB_USER")
+SECOND_DB_PWD = os.getenv("SECOND_DB_PWD")
+SECOND_DB_NAME = os.getenv("SECOND_DB_NAME")
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
@@ -52,6 +57,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     # my apps
     "article",
+    "chat",
 ]
 
 MIDDLEWARE = [
@@ -97,7 +103,17 @@ DATABASES = {
         "HOST": DB_HOST,
         "PORT": "5432",
     },
+    "second_db": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": SECOND_DB_NAME,
+        "USER": SECOND_DB_USER,
+        "PASSWORD": SECOND_DB_PWD,
+        "HOST": SECOND_DB_HOST,
+        "PORT": "5432",
+    },
 }
+
+DATABASE_ROUTERS = ["django_project.dbRouter.DatabaseRouter"]
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators

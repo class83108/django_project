@@ -1,8 +1,10 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.db.models import Q, Count
+from django.http import JsonResponse
 
+from .models import Tag, Article, create_table
 
-from .models import Tag, Article, Category, Author
+import time
 
 
 def article_view(request):
@@ -53,3 +55,17 @@ def tag_view(request):
 def tag_detail_view(request, tag_id):
     tag = Tag.objects.get(tag_id=tag_id)
     return render(request, "tag_detail.html", {"tag": tag})
+
+
+def create_table_view(request):
+    today = time.localtime(time.time())
+    article = Article.objects.get(article_id=2)
+    model_name = f"{article.article_id}_{time.strftime('%Y%m%d', today)}_view"
+
+    new_model = create_table(model_name=model_name)
+    new_model.objects.create(
+        views=0,
+        date=today,
+        article=article,
+    )
+    return JsonResponse({"status": "success"})
