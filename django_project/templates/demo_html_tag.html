@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="card_container container">
+	<div class="row">
+		<div class="col-lg-6">
+			{% include "card.html" with title="Samoyed Dogs" content=samoyed_content img="images/samoyed.jpg" %}
+		</div>
+		<div class="col-lg-6">
+			{% include "card.html" with title="Golden Retriever" content=golden_retriever_content img="images/golden.jpg" %}
+		</div>
+	</div>
+</section>
+{% endblock content %}

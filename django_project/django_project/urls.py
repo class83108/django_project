@@ -17,11 +17,19 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
 
-from .views import index_view
+from .views import index_view, demo_path_view, demo_view, demo_html_tag_view
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("article/", include("article.urls")),
-    path("<str:user_name>/<int:age>/<slug:page_name>", index_view),
+    path("article/", include(("article.urls", "article"), namespace="article")),
+    # path("<str:user_name>/<int:age>/<slug:page_name>/<uuid:user_id>", index_view),
+    # path("<path:to_inde_page>", demo_path_view),
+    path("demo/", demo_view),
+    path("demo_html_tag/", demo_html_tag_view),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

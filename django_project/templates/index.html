@@ -6,6 +6,16 @@
 	<title>Document</title>
 </head>
 <body>
-	{{ url_info }}
+	{% comment %} <div>
+		{% for key, value in url_info.items %}
+			<p>{{ key }}: {{ value }}</p>
+		{% endfor %}
+	</div> {% endcomment %}
+	{% comment %} <p>
+		{{ to_inde_page }}: {{ to_inde_page_type }}
+	</p> {% endcomment %}
+	<h1>
+		{% url "article:tag_view" %}
+	</h1>
 </body>
 </html>

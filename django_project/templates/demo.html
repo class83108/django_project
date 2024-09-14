@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<body>
+	<div>
+		<a href="{% url "article:tag_detail_view" "1" %}">tag_detail_view</a>
+		<p>the link of the above url: <strong>{% url "article:tag_detail_view" "1" %}</strong></p>
+		<p>url is: <strong>{{ url }}</strong></p>
+	</div>
+</body>
+</html>
