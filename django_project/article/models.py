@@ -104,21 +104,33 @@ class Article(models.Model):
 class ArticleV2(models.Model):
     article_id = models.AutoField(primary_key=True)
     title = models.CharField(
-        max_length=120, verbose_name="Title", unique=True, null=False
+        max_length=120,
+        unique=True,
+        null=False,
+        verbose_name="標題",
     )
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    category = models.ForeignKey("Category", on_delete=models.CASCADE)
-    author = models.ForeignKey("Author", on_delete=models.CASCADE)
-    tags = models.ManyToManyField("Tag")
+    category = models.ForeignKey(
+        "Category", on_delete=models.CASCADE, verbose_name="分類"
+    )
+    author = models.ForeignKey("Author", on_delete=models.CASCADE, verbose_name="作者")
+    tags = models.ManyToManyField("Tag", verbose_name="標籤")
 
     # 新增欄位
-    cover = models.ImageField(upload_to="static/images/cover_image", null=True)
+    cover = models.ImageField(
+        upload_to="static/images/cover_image", null=True, verbose_name="封面"
+    )
     # 修改欄位
-    content = JSONField(default=dict)
+    content = JSONField(default=dict, verbose_name="內容")
+
+    def __str__(self) -> str:
+        return self.title
 
     class Meta:
         app_label = "article"
+        verbose_name = "文章"
+        verbose_name_plural = "文章"
 
 
 class Category(models.Model):
@@ -130,6 +142,8 @@ class Category(models.Model):
 
     class Meta:
         app_label = "article"
+        verbose_name = "分類"
+        verbose_name_plural = "分類"
 
 
 class Author(models.Model):
@@ -142,6 +156,8 @@ class Author(models.Model):
 
     class Meta:
         app_label = "article"
+        verbose_name = "作者"
+        verbose_name_plural = "作者"
 
 
 class Tag(models.Model):
@@ -153,6 +169,8 @@ class Tag(models.Model):
 
     class Meta:
         app_label = "article"
+        verbose_name = "標籤"
+        verbose_name_plural = "標籤"
 
 
 # class DemoManager(models.Manager):
