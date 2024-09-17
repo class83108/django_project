@@ -11,5 +11,7 @@
 		<p>the link of the above url: <strong>{% url "article:tag_detail_view" "1" %}</strong></p>
 		<p>url is: <strong>{{ url }}</strong></p>
 	</div>
+	{% with tag_count =   %}
+	{% endwith %}
 </body>
 </html>

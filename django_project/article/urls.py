@@ -4,9 +4,21 @@ from .views import (
     tag_detail_view,
     create_or_update_article,
     create_table_view,
+    demo_form_view,
+    article_list_view,
+    article_detail_view,
+    demo_model_form_view,
 )
 
 urlpatterns = [
+    path("demo_form/", demo_form_view, name="demo_form_view"),
+    path("demo_model_form/", demo_model_form_view, name="demo_model_form_view"),
+    path("article_list/", article_list_view, name="article_list_view"),
+    path(
+        "article_detail/<int:article_id>/",
+        article_detail_view,
+        name="article_detail_view",
+    ),
     path(
         "create_or_update_article/",
         create_or_update_article,

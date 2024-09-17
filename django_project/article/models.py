@@ -1,6 +1,7 @@
 from django.db import models
 from typing import Dict, Any, Optional, Type, Callable
 from django.core.handlers.wsgi import WSGIRequest
+from django.db.models import JSONField
 
 
 def create_model(
@@ -84,12 +85,37 @@ class Article(models.Model):
     title = models.CharField(
         max_length=120, verbose_name="Title", unique=True, null=False
     )
-    content = models.TextField()
+    # content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     category = models.ForeignKey("Category", on_delete=models.CASCADE)
     author = models.ForeignKey("Author", on_delete=models.CASCADE)
     tags = models.ManyToManyField("Tag")
+
+    # 新增欄位
+    cover_name = models.CharField(max_length=120, null=True)
+    # 修改欄位
+    content = JSONField(default=dict)
+
+    class Meta:
+        app_label = "article"
+
+
+class ArticleV2(models.Model):
+    article_id = models.AutoField(primary_key=True)
+    title = models.CharField(
+        max_length=120, verbose_name="Title", unique=True, null=False
+    )
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    category = models.ForeignKey("Category", on_delete=models.CASCADE)
+    author = models.ForeignKey("Author", on_delete=models.CASCADE)
+    tags = models.ManyToManyField("Tag")
+
+    # 新增欄位
+    cover = models.ImageField(upload_to="static/images/cover_image", null=True)
+    # 修改欄位
+    content = JSONField(default=dict)
 
     class Meta:
         app_label = "article"
@@ -98,6 +124,9 @@ class Article(models.Model):
 class Category(models.Model):
     category_id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=120)
+
+    def __str__(self) -> str:
+        return self.name
 
     class Meta:
         app_label = "article"
@@ -108,6 +137,9 @@ class Author(models.Model):
     name = models.CharField(max_length=120)
     age = models.IntegerField()
 
+    def __str__(self) -> str:
+        return self.name
+
     class Meta:
         app_label = "article"
 
@@ -115,6 +147,9 @@ class Author(models.Model):
 class Tag(models.Model):
     tag_id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=120)
+
+    def __str__(self) -> str:
+        return self.name
 
     class Meta:
         app_label = "article"
