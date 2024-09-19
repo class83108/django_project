@@ -1,0 +1,16 @@
+{% extends "admin/change_form.html" %}
+
+{% comment %} 自定義額外的css {% endcomment %}
+{% block extrastyle %}{{ block.super }}{% endblock %}
+
+{% comment %} 可以添加額外的css或是js進去 {% endcomment %}
+{% block extrahead %}
+{{ block.super }}
+{% endblock %}
+
+
+{% comment %} 自定義內容 {% endcomment %}
+{% block content %}
+{{ block.super }}
+
+{% endblock content %}

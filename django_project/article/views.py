@@ -1,6 +1,8 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.db.models import Q, Count
 from django.http import JsonResponse
+from django.views.generic import TemplateView, FormView
+from django.contrib.admin.sites import site
 
 from .models import Tag, Article, create_table, Category, Author, ArticleV2
 from .forms import ArticleForm, ArticleModelForm
@@ -119,3 +121,64 @@ def demo_model_form_view(request):
             error = article_form.errors
 
     return render(request, "demo_form.html", locals())
+
+
+# def custom_admin_page(request):
+#     return render(request, "custom_admin_page.html", locals())
+
+
+# class CustomAdminPageView(TemplateView):
+#     template_name = "custom_admin_page.html"
+
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+
+#         context.update(site.each_context(self.request))
+#         print(context)
+#         return context
+
+from django.contrib.admin.views.main import ERROR_FLAG
+
+
+class CustomAdminPageView(TemplateView):
+    template_name = "admin/custom_admin_page.html"
+    admin_site = None  # 初始化 admin_site
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)  # 獲取原始的上下文數據
+
+        # 獲取傳遞的 AdminSite 實例
+        admin_site = self.admin_site or self.request.site
+
+        if admin_site:
+            # 獲取完整的 admin 上下文
+            admin_context = admin_site.each_context(self.request)
+            context.update(admin_context)
+
+            # 添加額外的上下文數據
+            context.update(
+                {
+                    "title": "Custom Admin Page",
+                    "subtitle": None,
+                    # 是否為 popup
+                    "is_popup": False,
+                    "has_permission": self.request.user.is_active
+                    and self.request.user.is_staff,
+                    # 是否啟用側邊欄
+                    "is_nav_sidebar_enabled": admin_context.get(
+                        "is_nav_sidebar_enabled", True
+                    ),
+                    # 獲取應用列表
+                    "available_apps": admin_site.get_app_list(self.request),
+                    ERROR_FLAG: admin_context.get(ERROR_FLAG, ""),
+                }
+            )
+
+        return context
+
+    # 重寫as_view方法，保存添加admin_site屬性
+    @classmethod
+    def as_view(cls, **initkwargs):
+        view = super().as_view(**initkwargs)
+        view.admin_site = initkwargs.get("admin_site")
+        return view

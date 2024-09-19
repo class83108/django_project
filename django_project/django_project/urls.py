@@ -16,6 +16,7 @@ Including another URLconf
 """
 
 from django.contrib import admin
+from article.admin import admin_site
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
@@ -23,7 +24,8 @@ from django.conf.urls.static import static
 from .views import index_view, demo_path_view, demo_view, demo_html_tag_view
 
 urlpatterns = [
-    path("admin/", admin.site.urls),
+    # path("admin/", admin.site.urls),
+    path("admin/", admin_site.urls),
     path("article/", include(("article.urls", "article"), namespace="article")),
     path("chat/", include(("chat.urls", "chat"), namespace="chat")),
     # path("<str:user_name>/<int:age>/<slug:page_name>/<uuid:user_id>", index_view),
