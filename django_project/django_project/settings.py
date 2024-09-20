@@ -49,6 +49,8 @@ ALLOWED_HOSTS = ["*"]
 # Application definition
 
 INSTALLED_APPS = [
+    # 控制後台主题
+    "jazzmin",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -68,7 +70,17 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "django.middleware.locale.LocaleMiddleware",
 ]
+
+LANGUAGES = [
+    ("en", "English"),
+    ("zh-hant", "繁體中文"),
+    # 添加其他你想支持的語言
+]
+
+USE_I18N = True
+
 
 ROOT_URLCONF = "django_project.urls"
 
@@ -157,3 +169,78 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
+JAZZMIN_SETTINGS = {
+    # 控制網站title
+    "site_title": "後台管理",
+    # 控制sidebar的上方標題
+    "site_brand": "Library",
+    # 可以在這裡設定logo
+    # "site_logo": "books/img/logo.png",
+    # 控制登入頁面的logo 可以之後用request.user來判斷要顯示哪一個logo
+    "login_logo": None,
+    # 控制footer的版權資訊
+    "copyright": "Acme Library Ltd",
+    # 控制上方的搜尋欄可以搜尋的model，並且搭配admin的search_fields
+    "search_model": ["auth.User", "auth.Group", "article.ArticleV2"],
+    ############
+    # Top Menu #
+    ############
+    # 上方的navbar
+    "topmenu_links": [
+        # 除了控制顯示的名稱，也可以控制連結的url，並且可以設定權限
+        {"name": "Home", "url": "admin:index", "permissions": ["auth.view_user"]},
+        # 可以設定新開視窗
+        {
+            "name": "Support",
+            "url": "https://github.com/farridav/django-jazzmin/issues",
+            "new_window": True,
+        },
+        # 可以設定要去哪個model的頁面 會檢查是否有model的權限
+        {"model": "auth.User"},
+        # 可以設定要去哪個app的頁面 會檢查是否有app的權限
+        {"app": "article"},
+    ],
+    #############
+    # User Menu #
+    #############
+    # 控制上方user的menu 還能有什麼額外的連結
+    "usermenu_links": [
+        {
+            "name": "Support",
+            "url": "https://github.com/farridav/django-jazzmin/issues",
+            "new_window": True,
+        },
+        {"model": "auth.user"},
+    ],
+    #############
+    # Side Menu #
+    #############
+    # 可以添加自定義的連結
+    # "custom_links": {
+    #     "article": [
+    #         {
+    #             "name": "Make Messages",
+    #             "url": "make_messages",
+    #             "icon": "fas fa-comments",
+    #             "permissions": ["auth.view_user"],
+    #         }
+    #     ]
+    # },
+    #################
+    # Related Modal #
+    #################
+    # 控制是否顯示related modal還是poup window
+    "related_modal_active": False,
+    #############
+    # UI Tweaks #
+    #############
+    # 可以添加自定義的css和js
+    "custom_css": None,
+    "custom_js": None,
+    # 控制是否顯示UI建構器
+    "show_ui_builder": True,
+    # 可以控制是否顯示語言選擇器
+    "language_chooser": True,
+}
