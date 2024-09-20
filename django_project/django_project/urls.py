@@ -24,8 +24,11 @@ from django.conf.urls.i18n import i18n_patterns
 
 from .views import index_view, demo_path_view, demo_view, demo_html_tag_view
 
-
 urlpatterns = [
+    path("mdeditor/", include("mdeditor.urls")),
+]
+
+urlpatterns += [
     path("i18n/", include("django.conf.urls.i18n")),
 ]
 

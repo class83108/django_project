@@ -8,13 +8,11 @@ from django.utils.translation import gettext_lazy as _
 from django.urls import reverse
 from django.contrib.auth.models import Group, User
 from django.contrib.auth.admin import GroupAdmin, UserAdmin
-
 from article.views import CustomAdminPageView as CustomView
+from .models import ArticleV2, Tag, Category, Author
+
 
 import re
-
-
-from .models import ArticleV2, Tag, Category, Author
 
 
 class CustomAdminPageView(admin.AdminSite):
