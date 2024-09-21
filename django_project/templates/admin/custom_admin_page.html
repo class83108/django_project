@@ -1,5 +1,48 @@
 {% extends "admin/base_site.html" %}
 
+{% block extrahead %}
+{{ block.super }}
+
+{% endblock extrahead %}
+
+
+
+
 {% block content %}
-<p>This is your custom admin page content.</p>
+<div class="container">
+	<div class="row">
+		<div class="col">
+
+				<canvas id="myChart"></canvas>
+
+		</div>
+	</div>
+</div>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <script>
+	const ctx = document.getElementById('myChart');
+  
+	new Chart(ctx, {
+	  type: 'bar',
+	  data: {
+		labels: {{ tag_count_result.labels | safe }},
+		datasets: [{
+		  label: 'Tag Count',
+		  data: {{ tag_count_result.data | safe }},
+		  borderWidth: 1
+		}]
+	  },
+	  options: {
+		scales: {
+		  y: {
+			beginAtZero: true
+		  }
+		}
+	  }
+	});
+</script>
+
 {% endblock %}

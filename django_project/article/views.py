@@ -6,6 +6,9 @@ from django.contrib.admin.sites import site
 
 from .models import Tag, Article, create_table, Category, Author, ArticleV2
 from .forms import ArticleForm, ArticleModelForm
+from utility import get_tags_count
+
+import json
 
 import time
 
@@ -171,6 +174,7 @@ class CustomAdminPageView(TemplateView):
                     # 獲取應用列表
                     "available_apps": admin_site.get_app_list(self.request),
                     ERROR_FLAG: admin_context.get(ERROR_FLAG, ""),
+                    "tag_count_result": json.loads(get_tags_count()),
                 }
             )
 

@@ -51,7 +51,7 @@ ALLOWED_HOSTS = ["*"]
 INSTALLED_APPS = [
     "mdeditor",
     # 控制後台主题
-    # "jazzmin",
+    "jazzmin",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
