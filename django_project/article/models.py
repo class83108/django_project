@@ -129,8 +129,8 @@ class ArticleV2(models.Model):
         upload_to="static/images/cover_image", null=True, verbose_name="封面"
     )
     # 修改欄位
-    # content = JSONField(default=dict, verbose_name="內容")
-    content = MDTextField(verbose_name="內容")
+    content = JSONField(default=dict, verbose_name="內容")
+    # content = MDTextField(verbose_name="內容")
 
     def __str__(self) -> str:
         return self.title

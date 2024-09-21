@@ -147,18 +147,19 @@ class AuthorAdmin(admin.ModelAdmin):
     list_display = ["name", "age"]
 
 
-admin_site = CustomAdminPageView(name="admin")
+# admin_site = CustomAdminPageView(name="admin")
 
-admin_site.register(ArticleV2, ArticleAdmin)
-admin_site.register(Tag)
-admin_site.register(Category)
-admin_site.register(Author, AuthorAdmin)
-admin_site.register(Group, GroupAdmin)
-admin_site.register(User, UserAdmin)
+# admin_site.register(ArticleV2, ArticleAdmin)
+# admin_site.register(Tag)
+# admin_site.register(Category)
+# admin_site.register(Author, AuthorAdmin)
+# admin_site.register(Group, GroupAdmin)
+# admin_site.register(User, UserAdmin)
 
-# admin.site.register(ArticleV2, ArticleAdmin)
+admin.site.__class__ = CustomAdminPageView
+admin.site.register(ArticleV2, ArticleAdmin)
 
 
-# admin.site.register(Tag)
-# admin.site.register(Category)
-# admin.site.register(Author, AuthorAdmin)
+admin.site.register(Tag)
+admin.site.register(Category)
+admin.site.register(Author, AuthorAdmin)

@@ -51,7 +51,7 @@ ALLOWED_HOSTS = ["*"]
 INSTALLED_APPS = [
     "mdeditor",
     # 控制後台主题
-    "jazzmin",
+    # "jazzmin",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -245,7 +245,7 @@ JAZZMIN_SETTINGS = {
     # 控制是否顯示UI建構器
     "show_ui_builder": True,
     # 可以控制是否顯示語言選擇器
-    "language_chooser": True,
+    # "language_chooser": True,
 }
 
 
@@ -322,7 +322,7 @@ MDEDITOR_CONFIGS = {
         "watch": True,  # Live preview
         "lineWrapping": False,  # lineWrapping
         "lineNumbers": False,  # lineNumbers
-        "language": "zh",  # zh / en / es
+        # "language": "zh",  # zh / en / es
     }
 }
 

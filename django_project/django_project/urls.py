@@ -16,7 +16,8 @@ Including another URLconf
 """
 
 from django.contrib import admin
-from article.admin import admin_site
+
+# from article.admin import admin_site
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
@@ -36,19 +37,33 @@ if settings.DEBUG:
         path("__debug__/", include(debug_toolbar.urls)),
     ]
 
-urlpatterns += [
-    path("i18n/", include("django.conf.urls.i18n")),
-]
+# urlpatterns += [
+#     path("i18n/", include("django.conf.urls.i18n")),
+# ]
 
-urlpatterns += i18n_patterns(
-    path("admin/", admin_site.urls),
+# urlpatterns += i18n_patterns(
+#     # path("admin/", admin_site.urls),
+#     path("admin/", admin.site.urls),
+#     path("admin_tools_stats/", include("admin_tools_stats.urls")),
+#     path("article/", include(("article.urls", "article"), namespace="article")),
+#     path("chat/", include(("chat.urls", "chat"), namespace="chat")),
+#     # path("<str:user_name>/<int:age>/<slug:page_name>/<uuid:user_id>", index_view),
+#     # path("<path:to_inde_page>", demo_path_view),
+#     path("demo/", demo_view),
+#     path("demo_html_tag/", demo_html_tag_view),
+# )
+
+
+urlpatterns += [
+    # path("admin/", admin_site.urls),
+    path("admin/", admin.site.urls),
     path("article/", include(("article.urls", "article"), namespace="article")),
     path("chat/", include(("chat.urls", "chat"), namespace="chat")),
     # path("<str:user_name>/<int:age>/<slug:page_name>/<uuid:user_id>", index_view),
     # path("<path:to_inde_page>", demo_path_view),
     path("demo/", demo_view),
     path("demo_html_tag/", demo_html_tag_view),
-)
+]
 
 
 # urlpatterns = [
