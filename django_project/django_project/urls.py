@@ -59,6 +59,7 @@ urlpatterns += [
     path("admin/", admin.site.urls),
     path("article/", include(("article.urls", "article"), namespace="article")),
     path("chat/", include(("chat.urls", "chat"), namespace="chat")),
+    path("my_user/", include(("my_user.urls", "my_user"), namespace="my_user")),
     # path("<str:user_name>/<int:age>/<slug:page_name>/<uuid:user_id>", index_view),
     # path("<path:to_inde_page>", demo_path_view),
     path("demo/", demo_view),

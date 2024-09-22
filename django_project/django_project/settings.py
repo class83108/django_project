@@ -62,6 +62,7 @@ INSTALLED_APPS = [
     # my apps
     "article",
     "chat",
+    "my_user",
 ]
 
 MIDDLEWARE = [

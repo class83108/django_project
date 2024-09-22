@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block title %}
+<title>{{ title }}</title>
+{% endblock title %}
+
+{% block content %}
+<section class="container">
+	<h1>{{ page_title }}</h1>
+	<div class="row">
+		<div class="col">
+			{% if msg %}
+			{% if msg.code == 200 %}
+			<h2 class="p-2 text-success">
+				{{ msg.msg }}
+			</h2>
+			{% else %}
+			<h2 class="p-2 text-danger">
+				{{ msg.msg }}
+			</h2>
+			{% endif %}
+			
+			{% endif %}
+			<form action="{% url "my_user:user" %}" method="post">
+				{% csrf_token %}
+				<div class="mb-3">
+					<label for="username" class="form-label">Username</label>
+					<input type="text" class="form-control" id="username" aria-describedby="usernameHelp" name="username">
+					<div id="usernameHelp" class="form-text">輸入用戶名</div>
+				  </div>
+				  <div class="mb-3">
+					<label for="password" class="form-label">Password</label>
+					<input type="password" class="form-control" id="password" name="password">
+				  </div>
+				  <button type="submit" class="btn btn-primary bg-success border-0" name="register">註冊</button>
+				  <button type="submit" class="btn btn-primary bg-warning border-0" name="login">登入</button>
+				  <button type="submit" class="btn btn-primary border-0" name="logout">登出</button>
+			</form>
+		</div>
+	</div>
+</section>
+{% endblock content %}
